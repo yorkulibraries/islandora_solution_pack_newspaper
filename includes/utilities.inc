@@ -184,7 +184,7 @@ EOQ;
  */
 function islandora_newspaper_get_issues_solr(AbstractObject $object) {
   $parent_field = variable_get('islandora_newspaper_parent_issue_solr_field', 'RELS_EXT_isMemberOf_uri_ms');
-  $date_field = variable_get('islandora_newspaper_solr_date_field', 'RELS_EXT_dateIssued_literal_ms');
+  $date_field = variable_get('islandora_newspaper_solr_date_field', 'dc.date');
   $sequence_field = variable_get('islandora_newspaper_solr_sequence_field', 'RELS_EXT_isSequenceNumber_literal_ms');
   // Counter for looping the start.
   $start = -1;
@@ -195,7 +195,7 @@ function islandora_newspaper_get_issues_solr(AbstractObject $object) {
 
   $solr_build = new IslandoraSolrQueryProcessor();
   $solr_query = format_string('!parent_field:("info:fedora/!pid" OR "!pid") AND'
-    . ' RELS_EXT_hasModel_uri_ms:"info:fedora/islandora:newspaperIssueCModel"',
+    . ' RELS_EXT_hasModel_uri_s:"info:fedora/islandora:newspaperIssueCModel"',
     array(
       '!parent_field' => $parent_field,
       '!pid' => $object->id,
